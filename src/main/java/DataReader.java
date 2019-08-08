@@ -2,15 +2,21 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class DataReader {
 
-    public static DataPoint[] readPoints() throws FileNotFoundException {
+    public static List<DataPoint> readPoints() throws FileNotFoundException {
         FileReader fr = new FileReader("points");
-        DataPoint[] retval = new DataPoint[20000];
+        List<DataPoint> list = new ArrayList<DataPoint>();
 
-        Scanner s = new Scanner(fr);
+        Scanner s = new Scanner(fr).useLocale(Locale.US); // https://stackoverflow.com/questions/4713166/decimal-separator-in-numberformat/4713746
+
         int i = 0;
         while (s.hasNextFloat()) {
             float x = s.nextFloat();
@@ -21,21 +27,8 @@ public class DataReader {
             DataPoint dp = new DataPoint();
             dp.x = x;
             dp.y = y;
-            retval[i++] = dp;
+            list.add(dp);
         }
-        //for ()
-        return retval;
+        return list;
     }
-
-//    public static void writePoints() throws IOException {
-//        FileWriter fw = new FileWriter("points");
-//        for (int i = 0; i < 20000; i++) {
-//            DataPoint dp = new DataPoint();
-//            dp.x = (float) Math.random()*100 - 50;
-//            dp.y = (float) Math.random()*10 - 50;
-//            String s = String.format( "%f %f %n", dp.x, dp.y);
-//
-//            fw.write(s);
-//        }
-//    }
 }

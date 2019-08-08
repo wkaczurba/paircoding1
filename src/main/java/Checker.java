@@ -1,8 +1,8 @@
 public class Checker {
 
-    public static boolean isInsideRectangle(Rectangle rectangle, float x1, float y1) {
+    public static boolean isInsideRectangle(Rectangle rectangle, float x, float y) {
 
-        // TODO: DId not have time to finish this.
-        return false;
+        return rectangle.containsPoint(x, y);
+
     }
 }
